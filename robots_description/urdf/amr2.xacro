@@ -3,13 +3,13 @@
   <xacro:include filename="$(find robots_description)/urdf/amr_base_common.xacro"/>
 
   <!-- customize AMR-2 -->
-  <xacro:property name="wheel_radius" value="0.09"/>
-  <xacro:property name="wheel_width"  value="0.06"/>
-  <xacro:property name="wheel_base"   value="0.48"/>
-  <xacro:property name="chassis_length" value="0.70"/>
-  <xacro:property name="chassis_width"  value="0.55"/>
-  <xacro:property name="chassis_height" value="0.22"/>
-  <xacro:property name="mass_chassis" value="20.0"/>
+  <xacro:property name="wheel_radius" value="0.1"/>
+  <xacro:property name="wheel_width"  value="0.05"/>
+  <xacro:property name="wheel_base"   value=".75"/>
+  <xacro:property name="chassis_length" value="1.0"/>
+  <xacro:property name="chassis_width"  value="0.6"/>
+  <xacro:property name="chassis_height" value="0.2"/>
+  <xacro:property name="mass_chassis" value="200.0"/>
 
   <!-- base -->
   <link name="base_link">
