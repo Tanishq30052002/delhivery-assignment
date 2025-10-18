@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<robot name="tug" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="tug"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:include filename="$(find robots_description)/urdf/tug.model.xacro"/>
 
   <xacro:arg name="robot_name" default="tug_X"/>
