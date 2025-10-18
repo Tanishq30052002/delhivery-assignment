@@ -75,8 +75,72 @@
 				<publish_wheel_tf>true</publish_wheel_tf>
 
 				<odometry_frame>world</odometry_frame>
-				<robot_base_frame>${robot_name}/base_link</robot_base_frame>
+				<robot_base_frame>${robot_name}/robot</robot_base_frame>
 			</plugin>
+		</gazebo>
+
+		<gazebo reference="${robot_name}/imu">
+			<gravity>true</gravity>
+			<sensor name="${robot_name}_imu_sensor" type="imu">
+				<always_on>true</always_on>
+				<update_rate>100</update_rate>
+				<visualize>false</visualize>
+				<plugin name="${robot_name}_imu_gazebo_plugin" filename="libgazebo_ros_imu_sensor.so">
+					<ros>
+						<namespace>${robot_name}</namespace>
+						<remapping>~/out:=imu</remapping>
+					</ros>
+					<bodyName>${robot_name}/imu</bodyName>
+					<updateRateHZ>10.0</updateRateHZ>
+					<xyzOffset>0 0 0</xyzOffset>
+					<rpyOffset>0 0 0</rpyOffset>
+					<frameName>${robot_name}/imu</frameName>
+					<initialOrientationAsReference>false</initialOrientationAsReference>
+				</plugin>
+				<pose>0 0 0 0 0 0</pose>
+			</sensor>
+		</gazebo>
+
+		<gazebo reference="${robot_name}/lidar">
+			<sensor name="${robot_name}_lidar" type="ray">
+				<always_on>true</always_on>
+				<update_rate>10</update_rate>				<!-- scan frequency in Hz -->
+				<visualize>true</visualize>
+
+				<!-- Laser ray configuration -->
+				<ray>
+					<scan>
+						<horizontal>
+							<samples>36</samples>							<!-- number of points per scan (low precision) -->
+							<resolution>1</resolution>
+							<min_angle>-1.57</min_angle>							<!-- -90 degrees -->
+							<max_angle>1.57</max_angle>							<!-- 90 degrees -->
+						</horizontal>
+					</scan>
+					<range>
+						<min>0.1</min>
+						<max>10.0</max>
+						<resolution>0.01</resolution>
+					</range>
+					<!-- Low-precision Gaussian noise -->
+					<noise type="gaussian">
+						<mean>0.0</mean>
+						<stddev>0.05</stddev>
+					</noise>
+				</ray>
+
+				<plugin name="${robot_name}_lidar_gazebo_plugin" filename="libgazebo_ros_ray_sensor.so">
+					<ros>
+						<namespace>${robot_name}</namespace>
+						<remapping>~/out:=lidar/points</remapping>
+					</ros>
+					<output_type>sensor_msgs/PointCloud2</output_type>
+					<min_intensity>100.0</min_intensity>
+					<frame_name>${robot_name}/lidar</frame_name>
+				</plugin>
+
+				<pose>0 0 0 0 0 0</pose>				<!-- adjust height above base_link -->
+			</sensor>
 		</gazebo>
 
 	</xacro:macro>

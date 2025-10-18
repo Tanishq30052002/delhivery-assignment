@@ -16,7 +16,7 @@
     <xacro:property name="wheel_gap_from_base" value="0.01"/>
     <xacro:property name="wheel_separation" value="${base_width/2 + wheel_width/2 + wheel_gap_from_base}"/>
 
-    <link name="${robot_name}/base_link">
+    <link name="${robot_name}/robot">
       <inertial>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="25.0"/>
@@ -40,7 +40,7 @@
     </link>
 
     <joint name="${robot_name}/joint_left_wheel" type="continuous">
-      <parent link="${robot_name}/base_link"/>
+      <parent link="${robot_name}/robot"/>
       <child link="${robot_name}/left_wheel"/>
       <origin xyz="0 ${wheel_separation} ${wheel_radius/2}" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
@@ -70,7 +70,7 @@
     </link>
 
     <joint name="${robot_name}/joint_right_wheel" type="continuous">
-      <parent link="${robot_name}/base_link"/>
+      <parent link="${robot_name}/robot"/>
       <child link="${robot_name}/right_wheel"/>
       <origin xyz="0 -${wheel_separation} ${wheel_radius/2}" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
@@ -100,7 +100,7 @@
     </link>
 
     <joint name="${robot_name}/caster_joint_back" type="fixed">
-      <parent link="${robot_name}/base_link"/>
+      <parent link="${robot_name}/robot"/>
       <child link="${robot_name}/caster_link_back"/>
       <origin xyz="-${base_length/4} 0 0"/>
     </joint>
@@ -125,7 +125,7 @@
 
 
     <joint name="${robot_name}/caster_joint_front" type="fixed">
-      <parent link="${robot_name}/base_link"/>
+      <parent link="${robot_name}/robot"/>
       <child link="${robot_name}/caster_link_front"/>
       <origin xyz="${base_length/4} 0 0"/>
     </joint>
@@ -148,13 +148,13 @@
       </collision>
     </link>
 
-    <joint name="${robot_name}/laser_joint" type="fixed">
-      <parent link="${robot_name}/base_link"/>
-      <child link="${robot_name}/laser_link"/>
+    <joint name="${robot_name}/lidar_joint" type="fixed">
+      <parent link="${robot_name}/robot"/>
+      <child link="${robot_name}/lidar"/>
       <origin xyz="${base_length/2-0.05} 0 ${base_height+0.03}" rpy="0 0 0"/>
     </joint>
 
-    <link name="${robot_name}/laser_link">
+    <link name="${robot_name}/lidar">
       <visual>
         <origin xyz="0 0 0"/>
         <geometry>
@@ -173,12 +173,12 @@
     </link>
 
     <joint name="${robot_name}/imu_joint" type="fixed">
-      <parent link="${robot_name}/base_link"/>
-      <child link="${robot_name}/imu_link"/>
+      <parent link="${robot_name}/robot"/>
+      <child link="${robot_name}/imu"/>
       <origin xyz="0 0 ${base_height/2}"/>
     </joint>
 
-    <link name="${robot_name}/imu_link"/>
+    <link name="${robot_name}/imu"/>
 
 
     <xacro:tug_gazebo robot_name="$(arg robot_name)"/>
