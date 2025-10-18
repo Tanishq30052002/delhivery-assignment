@@ -1,52 +1,53 @@
-from pty import spawn
+#!/usr/bin/env python3
+import os
+import xacro
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.substitutions import Command, PathJoinSubstitution
 from launch_ros.actions import Node
-from launch_ros.substitutions import FindPackageShare
-
+from launch.substitutions import Command
 
 def generate_launch_description():
-    pkg_share = FindPackageShare("robots_description")
+    ld = LaunchDescription()
 
-    amr1_urdf = Command(["xacro ", PathJoinSubstitution([pkg_share, "urdf", "amr1.xacro"])])
-    amr2_urdf = Command(["xacro ", PathJoinSubstitution([pkg_share, "urdf", "amr2.xacro"])])
 
-    spawn_robots = []
+    # Fleet: (robot, namespace, x, y, z, yaw)
+    robots = [
+        ("tug", "tug_1", 0.0, 0.0, 0.0, 0.0),
+        ("tug", "tug_2", 2.0, 0.0, 0.0, 1.57),
+    ]
 
-    spawn_robots.append(
-        Node(
-            package="ros_gz_sim",
-            executable="create",
-            arguments=["-string", amr1_urdf, "-name", "amr1_1", "-x", "0", "-y", "0", "-z", "0.1"],
+    for robot, entity_name, x, y, z, yaw in robots:
+        xacro_file = f"{robot}.core.xacro"
+        robot_desc_path = os.path.join(get_package_share_directory("robots_description"), "urdf", xacro_file)
+
+        rsp_node = Node(
+            package="robot_state_publisher",
+            executable="robot_state_publisher",
+            namespace=entity_name,
+            parameters=[{
+                "use_sim_time": True,
+                "robot_description": Command(['xacro ', robot_desc_path, ' robot_name:=', entity_name]),
+
+            }],
             output="screen",
         )
-    )
 
-    spawn_robots.append(
-        Node(
-            package="ros_gz_sim",
-            executable="create",
-            arguments=["-string", amr1_urdf, "-name", "amr1_2", "-x", "1", "-y", "0", "-z", "0.1"],
-            output="screen",
-         )
-    )
-
-    spawn_robots.append(
-        Node(
-            package="ros_gz_sim",
-            executable="create",
-            arguments=["-string", amr2_urdf, "-name", "amr2_1", "-x", "2", "-y", "0", "-z", "0.1"],
-            output="screen",
+        spawn_node = Node(
+            package="gazebo_ros",
+            executable="spawn_entity.py",
+            namespace=entity_name,
+            arguments=[
+                "-entity", entity_name,
+                "-topic", f"/{entity_name}/robot_description",
+                "-x", str(x),
+                "-y", str(y),
+                "-z", str(z),
+                "-Y", str(yaw)
+            ],
+            output="screen"
         )
-    )
 
-    spawn_robots.append(
-        Node(
-            package="ros_gz_sim",
-            executable="create",
-            arguments=["-string", amr2_urdf, "-name", "amr2_2", "-x", "3", "-y", "0", "-z", "0.1"],
-            output="screen",
-        )
-    )
+        ld.add_action(rsp_node)
+        ld.add_action(spawn_node)
 
-    return LaunchDescription(spawn_robots)
+    return ld

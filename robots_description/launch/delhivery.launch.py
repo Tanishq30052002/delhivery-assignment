@@ -12,7 +12,7 @@ def generate_launch_description():
             PathJoinSubstitution([
                 FindPackageShare("aws_robomaker_small_warehouse_world"),
                 "launch",
-                "small_warehouse.launch.py"
+                "small_warehouse_launch.py"
             ])
         ])
     )

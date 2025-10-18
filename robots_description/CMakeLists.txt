@@ -13,9 +13,11 @@ find_package(ament_cmake REQUIRED)
 find_package(ament_cmake REQUIRED)
 find_package(xacro REQUIRED)
 
-install(DIRECTORY urdf launch
+install(
+  DIRECTORY urdf launch
   DESTINATION share/${PROJECT_NAME}
 )
+
 
 
 if(BUILD_TESTING)
@@ -30,4 +32,4 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-ament_package() 
+ament_package()

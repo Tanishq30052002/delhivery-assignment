@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<robot name="tug_gazebo" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:arg name="robot_name" default="tug_X"/>
+
+  <xacro:macro name="tug_gazebo" params="robot_name">
+
+  <xacro:property name="base_length" value="0.6"/>
+  <xacro:property name="base_width"  value="0.45"/>
+  <xacro:property name="base_height" value="0.18"/>
+  <xacro:property name="wheel_radius" value="0.08"/>
+  <xacro:property name="wheel_width" value="0.04"/>
+  <xacro:property name="wheel_gap_from_base" value="0.01"/>
+  <xacro:property name="wheel_separation" value="${base_width/2 + wheel_width/2 + wheel_gap_from_base}"/>
+
+  <gazebo>
+		<plugin name='${robot_name}_diff_drive_gazebo_plugin' filename='libgazebo_ros_diff_drive.so'>
+			<ros>
+			  <namespace>${robot_name}</namespace>
+			</ros>
+
+
+			<!-- wheels -->
+			<left_joint>${robot_name}/joint_left_wheel</left_joint>
+			<right_joint>${robot_name}/joint_right_wheel</right_joint>
+
+			<!-- kinematics -->
+			<wheel_separation>${wheel_separation}</wheel_separation>
+			<wheel_diameter>${2*wheel_radius}</wheel_diameter>
+
+			<!-- limits -->
+			<max_wheel_torque>20</max_wheel_torque>
+			<max_wheel_acceleration>1.0</max_wheel_acceleration>
+
+			<!-- output -->
+			<publish_odom>true</publish_odom>
+			<publish_odom_tf>true</publish_odom_tf>
+			<publish_wheel_tf>true</publish_wheel_tf>
+
+
+			<odometry_frame>world</odometry_frame>
+			<robot_base_frame>${robot_name}/base_link</robot_base_frame>
+		</plugin>
+	</gazebo>
+
+	  </xacro:macro>
+</robot>
