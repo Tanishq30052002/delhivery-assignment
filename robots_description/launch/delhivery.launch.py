@@ -3,6 +3,7 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
+from launch_ros.actions import Node
 
 
 def generate_launch_description():
@@ -23,12 +24,29 @@ def generate_launch_description():
             PathJoinSubstitution([
                 FindPackageShare("robots_description"),
                 "launch",
-                "spawn_fleet.launch.py"])
+                "spawn_fleet.launch.py"
+            ])
         ])
+    )
+
+    # 3️⃣ Launch RViz with preconfigured config
+    rviz_node = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2",
+        arguments=[
+            "-d", PathJoinSubstitution([
+                FindPackageShare("robots_description"),
+                "rviz",
+                "fleet_config.rviz"  # your RViz config file
+            ])
+        ],
+        output="screen"
     )
 
     # Return combined LaunchDescription
     return LaunchDescription([
         world_launch,
-        spawn_launch
+        spawn_launch,
+        rviz_node
     ])
