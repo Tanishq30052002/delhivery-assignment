@@ -14,6 +14,8 @@ def generate_launch_description():
     robots = [
         ("tug", "tug_1", 0.0, 0.0, 0.0, 0.0),
         ("tug", "tug_2", 2.0, 0.0, 0.0, 1.57),
+        ("picker", "pick_1", 2.0, 5.0, 0.0, 1.57),
+        ("picker", "pick_2", 2.0, -5.0, 0.0, -1.57),
     ]
 
     for robot, entity_name, x, y, z, yaw in robots:

@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 
-<robot name="tug_gazebo"
+<robot name="picker_gazebo"
 	xmlns:xacro="http://ros.org/wiki/xacro">
 
-	<xacro:arg name="robot_name" default="tug_X"/>
+	<xacro:arg name="robot_name" default="picker_X"/>
 
 	<xacro:include filename="$(find robots_description)/urdf/common.gazebo.xacro"/>
 
-	<xacro:macro name="tug_gazebo" params="robot_name">
+	<xacro:macro name="picker_gazebo" params="robot_name">
 
 		<xacro:common_gazebo robot_name="$(arg robot_name)"/>
 
 		<gazebo reference="${robot_name}/robot">
-			<material>Gazebo/Red</material>
+			<material>Gazebo/Green</material>
 		</gazebo>
 
 		<gazebo reference="${robot_name}/imu">
