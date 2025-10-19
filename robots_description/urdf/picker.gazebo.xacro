@@ -39,6 +39,7 @@
 
 		<!-- Depth Camera Sensor -->
 		<gazebo reference="${robot_name}/depth_camera_sensor">
+			<material>Gazebo/Black</material>
 			<sensor name="depth_camera" type="depth">
 				<always_on>true</always_on>
 				<update_rate>30.0</update_rate>

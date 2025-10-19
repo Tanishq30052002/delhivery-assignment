@@ -102,10 +102,30 @@
     <joint name="${robot_name}/joint_depth_camera" type="fixed">
       <parent link="${robot_name}/robot"/>
       <child link="${robot_name}/depth_camera"/>
-      <origin xyz="${base_length/2} 0 0"/>
+      <origin xyz="${base_length/2+0.0125} 0 ${base_height-0.0125}"/>
     </joint>
 
     <link name="${robot_name}/depth_camera">
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="0.1"/>
+        <inertia ixx=".1" ixy="0.0" ixz="0.0" iyy=".12" iyz="0.0" izz=".12"/>
+      </inertial>
+      <visual>
+        <geometry>
+          <box size="0.025 0.075 0.025"/>
+        </geometry>
+        <origin xyz="0 0 0"/>
+        <material name="black">
+          <color rgba="0 0 0 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.025 0.075 0.025"/>
+        </geometry>
+        <origin xyz="0 0 0"/>
+      </collision>
     </link>
 
     <joint name="${robot_name}/joint_depth_camera_sensor" type="fixed">
