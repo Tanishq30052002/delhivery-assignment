@@ -99,7 +99,26 @@
       </collision>
     </link>
 
-    <joint name="${robot_name}/caster_joint_back" type="fixed">
+    <joint name="${robot_name}/joint_depth_camera" type="fixed">
+      <parent link="${robot_name}/robot"/>
+      <child link="${robot_name}/depth_camera"/>
+      <origin xyz="${base_length/2} 0 0"/>
+    </joint>
+
+    <link name="${robot_name}/depth_camera">
+    </link>
+
+    <joint name="${robot_name}/joint_depth_camera_sensor" type="fixed">
+      <parent link="${robot_name}/depth_camera"/>
+      <child link="${robot_name}/depth_camera_sensor"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="${robot_name}/depth_camera_sensor">
+    </link>
+
+
+    <joint name="${robot_name}/joint_caster_back" type="fixed">
       <parent link="${robot_name}/robot"/>
       <child link="${robot_name}/caster_link_back"/>
       <origin xyz="-${base_length/4} 0 0"/>
@@ -123,8 +142,7 @@
       </collision>
     </link>
 
-
-    <joint name="${robot_name}/caster_joint_front" type="fixed">
+    <joint name="${robot_name}/joint_caster_front" type="fixed">
       <parent link="${robot_name}/robot"/>
       <child link="${robot_name}/caster_link_front"/>
       <origin xyz="${base_length/4} 0 0"/>

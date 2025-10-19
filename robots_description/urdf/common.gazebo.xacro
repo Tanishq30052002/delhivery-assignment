@@ -78,7 +78,7 @@
 
         <gazebo reference="${robot_name}/lidar">
             <material>Gazebo/Blue</material>
-            <sensor name="${robot_name}_lidar" type="ray">
+            <sensor name="lidar" type="ray">
                 <always_on>true</always_on>
                 <update_rate>10</update_rate>                <!-- scan frequency in Hz -->
                 <visualize>false</visualize>
