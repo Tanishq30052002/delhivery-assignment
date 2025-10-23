@@ -444,6 +444,156 @@ Visualization Manager:
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        map:
+          Value: true
+        picker_1/caster_link_back:
+          Value: false
+        picker_1/caster_link_front:
+          Value: false
+        picker_1/depth_camera:
+          Value: false
+        picker_1/depth_camera_sensor:
+          Value: false
+        picker_1/imu:
+          Value: false
+        picker_1/left_wheel:
+          Value: false
+        picker_1/lidar:
+          Value: false
+        picker_1/odom:
+          Value: true
+        picker_1/right_wheel:
+          Value: false
+        picker_1/robot:
+          Value: false
+        picker_2/caster_link_back:
+          Value: false
+        picker_2/caster_link_front:
+          Value: false
+        picker_2/depth_camera:
+          Value: false
+        picker_2/depth_camera_sensor:
+          Value: false
+        picker_2/imu:
+          Value: false
+        picker_2/left_wheel:
+          Value: false
+        picker_2/lidar:
+          Value: false
+        picker_2/odom:
+          Value: true
+        picker_2/right_wheel:
+          Value: false
+        picker_2/robot:
+          Value: false
+        tug_1/caster_link_back:
+          Value: false
+        tug_1/caster_link_front:
+          Value: false
+        tug_1/imu:
+          Value: false
+        tug_1/left_wheel:
+          Value: false
+        tug_1/lidar:
+          Value: false
+        tug_1/odom:
+          Value: true
+        tug_1/right_wheel:
+          Value: false
+        tug_1/robot:
+          Value: false
+        tug_2/caster_link_back:
+          Value: false
+        tug_2/caster_link_front:
+          Value: false
+        tug_2/imu:
+          Value: false
+        tug_2/left_wheel:
+          Value: false
+        tug_2/lidar:
+          Value: false
+        tug_2/odom:
+          Value: true
+        tug_2/right_wheel:
+          Value: false
+        tug_2/robot:
+          Value: false
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        map:
+          picker_1/odom:
+            picker_1/robot:
+              picker_1/caster_link_back:
+                {}
+              picker_1/caster_link_front:
+                {}
+              picker_1/depth_camera:
+                picker_1/depth_camera_sensor:
+                  {}
+              picker_1/imu:
+                {}
+              picker_1/left_wheel:
+                {}
+              picker_1/lidar:
+                {}
+              picker_1/right_wheel:
+                {}
+          picker_2/odom:
+            picker_2/robot:
+              picker_2/caster_link_back:
+                {}
+              picker_2/caster_link_front:
+                {}
+              picker_2/depth_camera:
+                picker_2/depth_camera_sensor:
+                  {}
+              picker_2/imu:
+                {}
+              picker_2/left_wheel:
+                {}
+              picker_2/lidar:
+                {}
+              picker_2/right_wheel:
+                {}
+          tug_1/odom:
+            tug_1/robot:
+              tug_1/caster_link_back:
+                {}
+              tug_1/caster_link_front:
+                {}
+              tug_1/imu:
+                {}
+              tug_1/left_wheel:
+                {}
+              tug_1/lidar:
+                {}
+              tug_1/right_wheel:
+                {}
+          tug_2/odom:
+            tug_2/robot:
+              tug_2/caster_link_back:
+                {}
+              tug_2/caster_link_front:
+                {}
+              tug_2/imu:
+                {}
+              tug_2/left_wheel:
+                {}
+              tug_2/lidar:
+                {}
+              tug_2/right_wheel:
+                {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -486,7 +636,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: 0
+      Angle: 3.149996280670166
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -496,11 +646,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 41.6094970703125
+      Scale: -42.637264251708984
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 0.4085606038570404
-      Y: 0.6008247137069702
+      X: 1.2217350006103516
+      Y: 0.7776907682418823
     Saved: ~
 Window Geometry:
   Displays:
