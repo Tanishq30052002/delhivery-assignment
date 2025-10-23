@@ -3,43 +3,46 @@
 <robot name="picker_gazebo"
 	xmlns:xacro="http://ros.org/wiki/xacro">
 
-	<xacro:arg name="robot_name" default="picker_X"/>
+	<xacro:arg name="ns" default="picker_X"/>
 
-	<xacro:include filename="$(find robots_description)/urdf/common.gazebo.xacro"/>
+	<xacro:include filename="$(find multi-robot-navigation)/urdf/common.gazebo.xacro"/>
 
-	<xacro:macro name="picker_gazebo" params="robot_name">
+	<xacro:macro name="picker_gazebo" params="ns">
 
-		<xacro:common_gazebo robot_name="$(arg robot_name)"/>
+		<xacro:common_gazebo ns="$(arg ns)"/>
 
-		<gazebo reference="${robot_name}/robot">
+		<gazebo reference="${ns}/robot">
 			<material>Gazebo/Green</material>
 		</gazebo>
 
-		<gazebo reference="${robot_name}/imu">
+		<gazebo reference="${ns}/imu">
 			<gravity>true</gravity>
 			<sensor name="imu_sensor" type="imu">
 				<always_on>true</always_on>
 				<update_rate>100</update_rate>
 				<visualize>false</visualize>
-				<plugin name="${robot_name}_imu_gazebo_plugin" filename="libgazebo_ros_imu_sensor.so">
+				<plugin name="${ns}_imu_gazebo_plugin" filename="libgazebo_ros_imu_sensor.so">
 					<ros>
-						<namespace>${robot_name}</namespace>
+						<namespace>${ns}</namespace>
 						<remapping>~/out:=imu</remapping>
 					</ros>
-					<bodyName>${robot_name}/imu</bodyName>
+					<bodyName>${ns}/imu</bodyName>
 					<updateRateHZ>10.0</updateRateHZ>
 					<xyzOffset>0 0 0</xyzOffset>
 					<rpyOffset>0 0 0</rpyOffset>
-					<frameName>${robot_name}/imu</frameName>
+					<frameName>${ns}/imu</frameName>
 					<initialOrientationAsReference>false</initialOrientationAsReference>
 				</plugin>
 				<pose>0 0 0 0 0 0</pose>
 			</sensor>
 		</gazebo>
 
-		<!-- Depth Camera Sensor -->
-		<gazebo reference="${robot_name}/depth_camera_sensor">
+		<gazebo reference="${ns}/depth_camera">
 			<material>Gazebo/Black</material>
+		</gazebo>
+
+		<!-- Depth Camera Sensor -->
+		<gazebo reference="${ns}/depth_camera_sensor">
 			<sensor name="depth_camera" type="depth">
 				<always_on>true</always_on>
 				<update_rate>30.0</update_rate>
@@ -59,13 +62,13 @@
 				</camera>
 
 				<!-- Gazebo ROS plugin -->
-				<plugin name="${robot_name}_depth_camera_gazebo_plugin" filename="libgazebo_ros_camera.so">
+				<plugin name="${ns}_depth_camera_gazebo_plugin" filename="libgazebo_ros_camera.so">
 					<ros>
 						<!-- Replace <robot_namespace> with your robot name or namespace -->
-						<namespace>${robot_name}</namespace>
+						<namespace>${ns}</namespace>
 						<remapping>~/out:=depth</remapping>
 					</ros>
-					<frame_name>${robot_name}/depth_camera_sensor</frame_name>
+					<frame_name>${ns}/depth_camera_sensor</frame_name>
 
 				</plugin>
 			</sensor>

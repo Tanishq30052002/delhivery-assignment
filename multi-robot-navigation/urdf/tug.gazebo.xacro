@@ -3,34 +3,34 @@
 <robot name="tug_gazebo"
 	xmlns:xacro="http://ros.org/wiki/xacro">
 
-	<xacro:arg name="robot_name" default="tug_X"/>
+	<xacro:arg name="ns" default="tug_X"/>
 
-	<xacro:include filename="$(find robots_description)/urdf/common.gazebo.xacro"/>
+	<xacro:include filename="$(find multi-robot-navigation)/urdf/common.gazebo.xacro"/>
 
-	<xacro:macro name="tug_gazebo" params="robot_name">
+	<xacro:macro name="tug_gazebo" params="ns">
 
-		<xacro:common_gazebo robot_name="$(arg robot_name)"/>
+		<xacro:common_gazebo ns="$(arg ns)"/>
 
-		<gazebo reference="${robot_name}/robot">
+		<gazebo reference="${ns}/robot">
 			<material>Gazebo/Red</material>
 		</gazebo>
 
-		<gazebo reference="${robot_name}/imu">
+		<gazebo reference="${ns}/imu">
 			<gravity>true</gravity>
-			<sensor name="${robot_name}_imu_sensor" type="imu">
+			<sensor name="${ns}_imu_sensor" type="imu">
 				<always_on>true</always_on>
 				<update_rate>100</update_rate>
 				<visualize>false</visualize>
-				<plugin name="${robot_name}_imu_gazebo_plugin" filename="libgazebo_ros_imu_sensor.so">
+				<plugin name="${ns}_imu_gazebo_plugin" filename="libgazebo_ros_imu_sensor.so">
 					<ros>
-						<namespace>${robot_name}</namespace>
+						<namespace>${ns}</namespace>
 						<remapping>~/out:=imu</remapping>
 					</ros>
-					<bodyName>${robot_name}/imu</bodyName>
+					<bodyName>${ns}/imu</bodyName>
 					<updateRateHZ>10.0</updateRateHZ>
 					<xyzOffset>0 0 0</xyzOffset>
 					<rpyOffset>0 0 0</rpyOffset>
-					<frameName>${robot_name}/imu</frameName>
+					<frameName>${ns}/imu</frameName>
 					<initialOrientationAsReference>false</initialOrientationAsReference>
 				</plugin>
 				<pose>0 0 0 0 0 0</pose>

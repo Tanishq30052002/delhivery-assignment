@@ -3,10 +3,10 @@
 <robot name="common_gazebo"
     xmlns:xacro="http://ros.org/wiki/xacro">
 
-    <xacro:arg name="robot_name" default="picker_X"/>
-    <xacro:macro name="common_gazebo" params="robot_name">
+    <xacro:arg name="ns" default="picker_X"/>
+    <xacro:macro name="common_gazebo" params="ns">
 
-        <gazebo reference="${robot_name}/left_wheel">
+        <gazebo reference="${ns}/left_wheel">
             <mu1>1.0</mu1>
             <mu2>1.0</mu2>
             <kp>1000000.0</kp>
@@ -16,7 +16,7 @@
             <material>Gazebo/Black</material>
         </gazebo>
 
-        <gazebo reference="${robot_name}/right_wheel">
+        <gazebo reference="${ns}/right_wheel">
             <mu1>1.0</mu1>
             <mu2>1.0</mu2>
             <kp>1000000.0</kp>
@@ -26,7 +26,7 @@
             <material>Gazebo/Black</material>
         </gazebo>
 
-        <gazebo reference="${robot_name}/caster_link_back">
+        <gazebo reference="${ns}/caster_link_back">
             <mu1>0.0</mu1>
             <mu2>0.0</mu2>
             <kp>1000000.0</kp>
@@ -36,7 +36,7 @@
             <material>Gazebo/Black</material>
         </gazebo>
 
-        <gazebo reference="${robot_name}/caster_link_front">
+        <gazebo reference="${ns}/caster_link_front">
             <mu1>0.0</mu1>
             <mu2>0.0</mu2>
             <kp>1000000.0</kp>
@@ -48,14 +48,14 @@
 
 
         <gazebo>
-            <plugin name='${robot_name}_diff_drive_gazebo_plugin' filename='libgazebo_ros_diff_drive.so'>
+            <plugin name='${ns}_diff_drive_gazebo_plugin' filename='libgazebo_ros_diff_drive.so'>
                 <ros>
-                    <namespace>${robot_name}</namespace>
+                    <namespace>${ns}</namespace>
                 </ros>
 
                 <!-- wheels -->
-                <left_joint>${robot_name}/joint_left_wheel</left_joint>
-                <right_joint>${robot_name}/joint_right_wheel</right_joint>
+                <left_joint>${ns}/joint_left_wheel</left_joint>
+                <right_joint>${ns}/joint_right_wheel</right_joint>
 
                 <!-- kinematics -->
                 <wheel_separation>${wheel_separation}</wheel_separation>
@@ -70,13 +70,13 @@
                 <publish_odom_tf>true</publish_odom_tf>
                 <publish_wheel_tf>true</publish_wheel_tf>
 
-                <odometry_frame>${robot_name}/odom</odometry_frame>
-                <robot_base_frame>${robot_name}/robot</robot_base_frame>
+                <odometry_frame>${ns}/odom</odometry_frame>
+                <robot_base_frame>${ns}/robot</robot_base_frame>
             </plugin>
         </gazebo>
 
 
-        <gazebo reference="${robot_name}/lidar">
+        <gazebo reference="${ns}/lidar">
             <material>Gazebo/Blue</material>
             <sensor name="lidar" type="ray">
                 <always_on>true</always_on>
@@ -105,14 +105,14 @@
                     </noise>
                 </ray>
 
-                <plugin name="${robot_name}_lidar_gazebo_plugin" filename="libgazebo_ros_ray_sensor.so">
+                <plugin name="${ns}_lidar_gazebo_plugin" filename="libgazebo_ros_ray_sensor.so">
                     <ros>
-                        <namespace>${robot_name}</namespace>
+                        <namespace>${ns}</namespace>
                         <remapping>~/out:=lidar/points</remapping>
                     </ros>
                     <output_type>sensor_msgs/LaserScan</output_type>
                     <min_intensity>100.0</min_intensity>
-                    <frame_name>${robot_name}/lidar</frame_name>
+                    <frame_name>${ns}/lidar</frame_name>
                 </plugin>
 
                 <pose>0 0 0 0 0 0</pose>                <!-- adjust height above base_link -->
