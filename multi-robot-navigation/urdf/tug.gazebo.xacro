@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<robot name="tug_gazebo"
+	xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<xacro:arg name="ns" default="tug_X"/>
+
+	<xacro:include filename="$(find multi-robot-navigation)/urdf/common.gazebo.xacro"/>
+
+	<xacro:macro name="tug_gazebo" params="ns">
+
+		<xacro:common_gazebo ns="$(arg ns)"/>
+
+		<gazebo reference="${ns}/robot">
+			<material>Gazebo/Red</material>
+		</gazebo>
+
+		<gazebo reference="${ns}/imu">
+			<gravity>true</gravity>
+			<sensor name="${ns}_imu_sensor" type="imu">
+				<always_on>true</always_on>
+				<update_rate>100</update_rate>
+				<visualize>false</visualize>
+				<plugin name="${ns}_imu_gazebo_plugin" filename="libgazebo_ros_imu_sensor.so">
+					<ros>
+						<namespace>${ns}</namespace>
+						<remapping>~/out:=imu</remapping>
+					</ros>
+					<bodyName>${ns}/imu</bodyName>
+					<updateRateHZ>10.0</updateRateHZ>
+					<xyzOffset>0 0 0</xyzOffset>
+					<rpyOffset>0 0 0</rpyOffset>
+					<frameName>${ns}/imu</frameName>
+					<initialOrientationAsReference>false</initialOrientationAsReference>
+				</plugin>
+				<pose>0 0 0 0 0 0</pose>
+			</sensor>
+		</gazebo>
+
+	</xacro:macro>
+</robot>

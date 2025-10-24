@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<robot name="tug"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find multi-robot-navigation)/urdf/tug.model.xacro"/>
+
+  <xacro:arg name="ns" default="tug_X"/>
+
+  <xacro:tug_model ns="$(arg ns)"/>
+
+</robot>

@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+
+<robot name="picker_gazebo"
+	xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<xacro:arg name="ns" default="picker_X"/>
+
+	<xacro:include filename="$(find multi-robot-navigation)/urdf/common.gazebo.xacro"/>
+
+	<xacro:macro name="picker_gazebo" params="ns">
+
+		<xacro:common_gazebo ns="$(arg ns)"/>
+
+		<gazebo reference="${ns}/robot">
+			<material>Gazebo/Green</material>
+		</gazebo>
+
+		<gazebo reference="${ns}/imu">
+			<gravity>true</gravity>
+			<sensor name="imu_sensor" type="imu">
+				<always_on>true</always_on>
+				<update_rate>100</update_rate>
+				<visualize>false</visualize>
+				<plugin name="${ns}_imu_gazebo_plugin" filename="libgazebo_ros_imu_sensor.so">
+					<ros>
+						<namespace>${ns}</namespace>
+						<remapping>~/out:=imu</remapping>
+					</ros>
+					<bodyName>${ns}/imu</bodyName>
+					<updateRateHZ>10.0</updateRateHZ>
+					<xyzOffset>0 0 0</xyzOffset>
+					<rpyOffset>0 0 0</rpyOffset>
+					<frameName>${ns}/imu</frameName>
+					<initialOrientationAsReference>false</initialOrientationAsReference>
+				</plugin>
+				<pose>0 0 0 0 0 0</pose>
+			</sensor>
+		</gazebo>
+
+		<gazebo reference="${ns}/depth_camera">
+			<material>Gazebo/Black</material>
+		</gazebo>
+
+		<!-- Depth Camera Sensor -->
+		<gazebo reference="${ns}/depth_camera_sensor">
+			<sensor name="depth_camera" type="depth">
+				<always_on>true</always_on>
+				<update_rate>30.0</update_rate>
+				<visualize>true</visualize>
+
+				<camera>
+					<horizontal_fov>1.047</horizontal_fov>					<!-- ~60 degrees -->
+					<image>
+						<width>640</width>
+						<height>480</height>
+						<format>R8G8B8</format>
+					</image>
+					<clip>
+						<near>0.05</near>
+						<far>5.0</far>
+					</clip>
+				</camera>
+
+				<!-- Gazebo ROS plugin -->
+				<plugin name="${ns}_depth_camera_gazebo_plugin" filename="libgazebo_ros_camera.so">
+					<ros>
+						<!-- Replace <robot_namespace> with your robot name or namespace -->
+						<namespace>${ns}</namespace>
+						<remapping>~/out:=depth</remapping>
+					</ros>
+					<frame_name>${ns}/depth_camera_sensor</frame_name>
+
+				</plugin>
+			</sensor>
+		</gazebo>
+
+
+	</xacro:macro>
+</robot>
