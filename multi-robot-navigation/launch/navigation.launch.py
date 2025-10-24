@@ -24,9 +24,9 @@ from nav2_common.launch import RewrittenYaml
 def generate_launch_description():
     robots_nav = {
         'tug_1': 'nav2_params_tug_1.yaml',
-        # 'tug_2': 'nav2_params_tug_2.yaml',
-        # 'picker_1': 'nav2_params_picker_1.yaml',
-        # 'picker_2': 'nav2_params_picker_2.yaml',
+        'tug_2': 'nav2_params_tug_2.yaml',
+        'picker_1': 'nav2_params_picker_1.yaml',
+        'picker_2': 'nav2_params_picker_2.yaml',
     }
 
     lifecycle_nodes = ['controller_server',
