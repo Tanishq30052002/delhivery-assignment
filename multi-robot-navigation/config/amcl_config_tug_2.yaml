@@ -37,7 +37,7 @@ tug_2/amcl:
     z_max: 0.05
     z_rand: 0.5
     z_short: 0.05
-    scan_topic: "lidar/points"
+    scan_topic: "scan"
     map_topic: "/map"
     # ACTIVATE THE set_initial_pose WHEN YOU HAVE A PROPER initial_pose, by uncommenting the code below
     #set_initial_pose: true

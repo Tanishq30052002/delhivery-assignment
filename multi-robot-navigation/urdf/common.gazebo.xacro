@@ -108,7 +108,7 @@
                 <plugin name="${ns}_lidar_gazebo_plugin" filename="libgazebo_ros_ray_sensor.so">
                     <ros>
                         <namespace>${ns}</namespace>
-                        <remapping>~/out:=lidar/points</remapping>
+                        <remapping>~/out:=scan</remapping>
                     </ros>
                     <output_type>sensor_msgs/LaserScan</output_type>
                     <min_intensity>100.0</min_intensity>

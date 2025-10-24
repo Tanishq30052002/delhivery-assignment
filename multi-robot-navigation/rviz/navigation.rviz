@@ -309,7 +309,7 @@ Visualization Manager:
             Durability Policy: Volatile
             History Policy: Keep Last
             Reliability Policy: Reliable
-            Value: /tug_1/lidar/points
+            Value: /tug_1/scan
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
@@ -470,7 +470,7 @@ Visualization Manager:
             Durability Policy: Volatile
             History Policy: Keep Last
             Reliability Policy: Reliable
-            Value: /tug_2/lidar/points
+            Value: /tug_2/scan
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
@@ -640,7 +640,7 @@ Visualization Manager:
             Durability Policy: Volatile
             History Policy: Keep Last
             Reliability Policy: Reliable
-            Value: /picker_1/lidar/points
+            Value: /picker_1/scan
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
@@ -823,7 +823,7 @@ Visualization Manager:
             Durability Policy: Volatile
             History Policy: Keep Last
             Reliability Policy: Reliable
-            Value: /picker_2/lidar/points
+            Value: /picker_2/scan
           Use Fixed Frame: true
           Use rainbow: true
           Value: true

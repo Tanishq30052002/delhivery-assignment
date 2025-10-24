@@ -13,7 +13,7 @@ slam_toolbox:
     odom_frame: tug_1/odom
     map_frame: map
     base_frame: tug_1/robot
-    scan_topic: /tug_1/lidar/points
+    scan_topic: /tug_1/scan
     mode: mapping #localization
 
     # if you'd like to immediately start continuing a map at a given pose

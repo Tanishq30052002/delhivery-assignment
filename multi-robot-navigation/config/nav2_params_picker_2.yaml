@@ -37,7 +37,7 @@ picker_2/amcl:
     z_max: 0.05
     z_rand: 0.5
     z_short: 0.05
-    scan_topic: /picker_2/lidar/points
+    scan_topic: /picker_2/scan
 
 amcl_map_client:
   ros__parameters:
@@ -184,7 +184,7 @@ local_costmap:
         mark_threshold: 0
         observation_sources: scan
         scan:
-          topic: /picker_2/lidar/points
+          topic: /picker_2/scan
           max_obstacle_height: 2.0
           clearing: True
           marking: True
@@ -217,7 +217,7 @@ global_costmap:
         enabled: True
         observation_sources: scan
         scan:
-          topic: /picker_2/lidar/points
+          topic: /picker_2/scan
           max_obstacle_height: 2.0
           clearing: True
           marking: True
